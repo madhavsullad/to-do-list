@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do List</title>
+    <link rel="stylesheet" type="text/css" href="css\stylesheet.css">
+    <link rel="icon" href="favicon_blue.png">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <meta http-equiv="refresh" content="10">
+    <script type="text/javascript">
+      // AJAX | jQuery
+
+      // insert from databse: Used by SYNC
+      function insertFromDb(taskFromDb, timestamp, checked) {
+        var li = document.createElement("li");
+        li.id = timestamp;
+        var t = document.createTextNode(taskFromDb);
+        li.appendChild(t);
+
+        if (checked == 'y') {
+          li.className = 'checked';
+        }
+
+        if (taskFromDb === '') {
+          alert("Empty Task in DB!");
+        } else {
+          document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+          }
+        }
+      }
+
+      // Sync
+      $(document).ready(function(){
+        $.ajax({ url: 'php/sync.php',
+                data: 'HTML_Started',
+                type: 'post',
+                success: function(data) {
+                  var jsonData = JSON.parse(data);
+                  for(var i=1; i<Object.keys(jsonData).length; i+=1) {
+                    insertFromDb(jsonData[i].tasks, jsonData[i].timestamp, jsonData[i].checked);
+                  }
+                  console.log("Synchronized all the tasks from the Database");
+                }
+        });
+      });
+      
+      //Add New Element : Calls insert.php
+      $(document).ready(function(){
+        $('#addForm').submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "php/insert.php",
+            data: $(this).serialize(),
+            success: function(response) {
+              var jsonData = JSON.parse(response);
+              newElement(jsonData.task);
+              console.log("Call status:" + jsonData.success);
+              console.log("Insert success status:" + jsonData.insertStat);
+              location.reload(true);
+            }
+          });
+        });
+      });
+
+      // remove task from db when closed
+      $(document).ready(function(){
+        $('body').on("click", '.close', function() {
+          //alert("Calling php to delete element id : " + $(this).parent().attr("id"));
+          $.ajax({
+            type: "POST",
+            url: "php/remove.php",
+            data: { "id": $(this).parent().attr("id")},
+            success: function(response) {
+              //alert("raw: " + response);
+              var jsonData = JSON.parse(response);
+              if(jsonData.success == 'True')
+                console.log('Successfully remove from db');
+              else if (jsonData.success == 'False'){
+                console.log("Failed to remove from db");
+                //alert(jsonData.success);
+              } else {
+                console.log(jsonData.success);
+              }
+            }
+          });
+        });
+      });
+
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <form id="addForm" method="post">
+        <h2 style="margin:5px">To Do List</h2>
+        <input type="text" name="task" id="myInput" placeholder="Task...">
+        <input type="submit" value="Add" class="addBtn"></input>
+        
+      </form>
+    </div>
+    <ul id="myUL">
+    </ul>
+    <button type="button" id="clear-list" onclick="removeAll()">Clear All</button>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+  </html>
