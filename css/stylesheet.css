@@ -106,9 +106,6 @@ body {
     background-color: #bbb;
   }
   #clear-list{
-    /*width: 200px;*/
-    /*font-weight: bold;*/
-    
     font-size: large;
     font-family: "Roboto";
     margin-right: auto;
@@ -121,6 +118,5 @@ body {
   }
   #clear-list:hover{
     font-style: italic;
-    /*background-color: blue;*/
     color: #ff3333;
   }

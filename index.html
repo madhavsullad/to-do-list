@@ -76,19 +76,16 @@
       // remove task from db when closed
       $(document).ready(function(){
         $('body').on("click", '.close', function() {
-          //alert("Calling php to delete element id : " + $(this).parent().attr("id"));
           $.ajax({
             type: "POST",
             url: "php/remove.php",
             data: { "id": $(this).parent().attr("id")},
             success: function(response) {
-              //alert("raw: " + response);
               var jsonData = JSON.parse(response);
               if(jsonData.success == 'True')
                 console.log('Successfully remove from db');
               else if (jsonData.success == 'False'){
                 console.log("Failed to remove from db");
-                //alert(jsonData.success);
               } else {
                 console.log(jsonData.success);
               }

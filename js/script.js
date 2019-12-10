@@ -25,7 +25,6 @@ list.addEventListener('click', function (ev) {
 
   if (ev.target.tagName === 'LI') {
     ev.target.classList.toggle('checked');
-	//console.log("click id: " + ev.target.id);
 	if(ev.target.className == 'checked')
 		var check = 'y';
 	else
@@ -40,7 +39,6 @@ list.addEventListener('click', function (ev) {
 				var jsonData = JSON.parse(response);
 				if(jsonData.success == 'True'){
 					console.log('Successfully updated');
-					//alert(response);
 				} else
 					console.log("Filed to update");
 			}
@@ -52,7 +50,6 @@ list.addEventListener('click', function (ev) {
 
 // Create a new list item when clicking on the "Add" button
 function newElement(myInput) {
-  //var myInput = document.getElementById("myInput").value;
   console.log(myInput);
   var li = document.createElement("li");
   var t = document.createTextNode(myInput);
@@ -64,7 +61,8 @@ function newElement(myInput) {
     document.getElementById("myUL").appendChild(li);
   }
   document.getElementById("myInput").value = "";
-  // append "close" button
+
+  // Append "close" button
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
