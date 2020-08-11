@@ -49,37 +49,65 @@ list.addEventListener('click', function (ev) {
 }, false);
 
 // Create a new list item when clicking on the "Add" button
-// function newElement(myInput) {
-//   console.log(myInput);
-//   var li = document.createElement("li");
-//   var t = document.createTextNode(myInput);
-//   li.appendChild(t);
+function newElement(myInput) {
+  console.log(myInput);
+  var li = document.createElement("li");
+  var t = document.createTextNode(myInput);
+  li.appendChild(t);
 
-//   if (myInput === '') {
-//     alert("You must write something!");
-//   } else {
-//     document.getElementById("myUL").appendChild(li);
-//   }
-//   document.getElementById("myInput").value = "";
+  if (myInput === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
 
-//   // Append "close" button
-//   var span = document.createElement("SPAN");
-//   var txt = document.createTextNode("\u00D7");
-//   span.className = "close";
-//   span.appendChild(txt);
-//   li.appendChild(span);
-//   for (i = 0; i < close.length; i++) {
-//     close[i].onclick = function () {
-//       var div = this.parentElement;
-//       div.style.display = "none";
-//       call();
-//     }
-//   }
-// }
+  // Append "close" button
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function () {
+      var div = this.parentElement;
+      div.style.display = "none";
+      call();
+    }
+  }
+}
 
+// insert from databse: Used by SYNC
+function insertFromDb(taskFromDb, timestamp, checked) {
+	var li = document.createElement("li");
+	li.id = timestamp;
+	var t = document.createTextNode(taskFromDb);
+	li.appendChild(t);
+
+	if (checked == 'y') {
+	  li.className = 'checked';
+	}
+
+	if (taskFromDb === '') {
+	  alert("Empty Task in DB!");
+	} else {
+	  document.getElementById("myUL").appendChild(li);
+	}
+	document.getElementById("myInput").value = "";
+	var span = document.createElement("SPAN");
+	var txt = document.createTextNode("\u00D7");
+	span.className = "close";
+	span.appendChild(txt);
+	li.appendChild(span);
+	for (i = 0; i < close.length; i++) {
+	  close[i].onclick = function () {
+		var div = this.parentElement;
+		div.style.display = "none";
+	  }
+	}
+  }
 
 //Clearing the list
-
 function removeAll() {
 	var lst = document.getElementsByTagName("ul");
 	lst[0].innerHTML = "";

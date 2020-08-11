@@ -1,9 +1,9 @@
 <?php
     // To open a connection with the db
     function openCon() {
-        $server = "localhost";
+        $server = "db";
         $user = "root";
-        $pass = "";
+        $pass = "root";
         $db = "todolist";
         
         $conn = mysqli_connect($server, $user, $pass, $db);
@@ -11,6 +11,7 @@
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
+        
         return $conn;
     }
 
