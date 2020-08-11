@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS todolist;
 USE todolist;
 DROP TABLE IF EXISTS `tasklist`;
 CREATE TABLE IF NOT EXISTS `tasklist` (
