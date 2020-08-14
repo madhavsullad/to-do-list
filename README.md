@@ -21,7 +21,7 @@ As of now, there is only one synchronized list - meaning only one person can use
 
 ## Usage
 
-> There are two ways to run this project. Initially I developed using the second method and then switched to the first one, using Docker - 
+> There are two ways to run this project. Initially I developed using the second method and then switched to the first one, using Docker.
 
 ### 1. Using Docker
 
@@ -38,7 +38,7 @@ As of now, there is only one synchronized list - meaning only one person can use
    docker-compose up
    ```
    
-   3. Go to [localhost:8000](localhost:8000).
+   3. Go to [localhost:8000](http://localhost:8000).
 
 ### 2. Using Wamp Server (For Windows)
 
@@ -52,4 +52,4 @@ As of now, there is only one synchronized list - meaning only one person can use
 
    3. Make sure Wamp server is up (as well as MySQL).
    
-   4. Go to [localhost/to-do-list](localhost/to-do-list).
+   4. Go to [localhost/to-do-list](http://localhost/to-do-list).
