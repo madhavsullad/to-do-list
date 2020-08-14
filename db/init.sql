@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS `tasklist` (
 --
 -- Dumping data for table `tasklist`
 --
+-- To start with an empty list, delete everything below this point.
+--
 
 INSERT INTO `tasklist` (`timestamp`, `tasks`, `checked`) VALUES
 ('2019-12-10 12:04:36', 'We can add any number of tasks', 'n'),
@@ -19,9 +21,6 @@ INSERT INTO `tasklist` (`timestamp`, `tasks`, `checked`) VALUES
 ('2019-12-10 12:05:21', 'We can also access this list from any device within the same LAN', 'n'),
 ('2019-12-10 12:05:54', 'When hosted world-wide anyone can access and use this to-do list', 'y'),
 ('2019-12-10 12:06:19', 'This project is made using HTML, CSS, PHP and Javascript', 'n'),
-('2019-12-10 12:07:45', 'Likith B', 'n'),
-('2019-12-10 12:07:41', 'Kishore Prabhakar', 'n'),
 ('2019-12-10 12:07:36', 'Made By:', 'n'),
-('2019-12-10 12:07:50', 'Madhav M Sullad', 'n'),
-('2019-12-10 12:07:55', 'Neeraj B M', 'n');
+('2019-12-10 12:07:50', 'Madhav M Sullad', 'y');
 COMMIT;
